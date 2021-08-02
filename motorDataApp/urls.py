@@ -7,11 +7,17 @@ from django.urls import path
 from motorDataApp import views
 
 urlpatterns = [
-    # API URLs list
+    # API Overview
     path(
-    	route='motor-list/',
+    	route='',
     	view= views.apiOverview,
-    	name='list'
+    	name='overview'
+    ),
+    # Motor available data List
+    path(
+        route='motorData-List',
+        view= views.motorDataList,
+        name='motorDataList'
     ),
 
 ]	

@@ -23,3 +23,36 @@ def motorDataList(request):
     serializer = MotorDataSerializer(motors, many=True)
     
     return Response(serializer.data)
+
+@api_view(['GET'])
+def motorDetail(request, pk):
+    motors = MotorData.objects.get(id=pk)
+    serializer = MotorDataSerializer(motors, many=False)
+    
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def motorCreate(request):
+    serializer = MotorDataSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def motorUpdate(request, pk):
+    motor = MotorData.objects.get(id=pk)
+    serializer = MotorDataSerializer(instance=motor, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+    
+@api_view(['DELETE'])
+def motorDelete(request, pk):
+    motor = MotorData.objects.get(id=pk)
+    motor.delete()
+
+    return Response('Item succesfully deleted!')
